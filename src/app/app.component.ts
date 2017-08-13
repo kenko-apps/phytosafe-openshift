@@ -6,7 +6,7 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Accueil } from '../pages/accueil/accueil';
 
-import { Settings } from '../providers/providers';
+import { Inactif } from '../providers/providers';
 
 import { TranslateService } from '@ngx-translate/core'
 
@@ -16,7 +16,7 @@ import { TranslateService } from '@ngx-translate/core'
 export class MyApp {
   rootPage = Accueil;
 
-  constructor(private translate: TranslateService, private platform: Platform, settings: Settings, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
     this.initTranslate();
   }
 

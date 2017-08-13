@@ -1,0 +1,77 @@
+<ion-header no-shadow>
+  <ion-navbar>
+    <ion-title>
+      <h2 class="slide-title">{{ 'FORM_MALADIE' | translate }}</h2>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <p *ngIf="!slideDeuxForm.valid && submitAttempt" class="FormAlerte">{{ 'FORM_ALERTE' | translate }}</p>
+  <form [formGroup]="slideDeuxForm" novalidate>
+
+    <ion-item no-lines>
+      <ion-label floating>{{ 'FORM_ORGANE_PRIMITIF' | translate }}</ion-label>
+      <ion-input [class.invalid]="!slideDeuxForm.controls.organe_primitif.valid && (slideDeuxForm.controls.organe_primitif.dirty || submitAttempt)" formControlName="organe_primitif" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="!slideDeuxForm.controls.organe_primitif.valid  && (slideDeuxForm.controls.organe_primitif.dirty || submitAttempt)">{{ 'FORM_ORGANE_PRIMITIF_ALERTE' | translate }}</p>
+
+    <ion-item no-lines>
+      <ion-label floating>{{ 'FORM_DATE_DIAGNOSTIC' | translate }}</ion-label>
+      <ion-datetime cancelText="annuler" doneText="valider" [class.invalid]="!slideDeuxForm.controls.date_diagnostic.valid && (slideDeuxForm.controls.date_diagnostic.dirty || submitAttempt)" formControlName="date_diagnostic" displayFormat="DD MMM YYYY" 
+        monthShortNames="jan, f\u00e9v, mars, avr, mai, juin, juil, ao\u00fbt, sept, oct, nov, d\u00e9c">
+      </ion-datetime>
+    </ion-item>
+    <p *ngIf="!slideDeuxForm.controls.date_diagnostic.valid  && (slideDeuxForm.controls.date_diagnostic.dirty || submitAttempt)">{{ 'FORM_DATE_DIAGNOSTIC_ALERTE' | translate }}</p>
+
+    <ion-list radio-group formControlName="maladie_check">
+      <p>{{ 'FORM_MALADIE_CHECK' | translate }}</p>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.maladie_check.valid && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_1' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_MALADIE_OPTION_1' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.maladie_check.valid && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.maladie_check.valid && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_2' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_MALADIE_OPTION_2' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.maladie_check.valid && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <p *ngIf="!slideDeuxForm.controls.maladie_check.valid  && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
+
+    <ion-list radio-group formControlName="chimio_check">
+      <p>{{ 'FORM_CHIMIO_CHECK' | translate }}</p>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.chimio_check.valid && (slideDeuxForm.controls.chimio_check.dirty || submitAttempt)">{{ 'FORM_CHIMIO_OPTION_1' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_CHIMIO_OPTION_1' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.maladie_check.valid && (slideDeuxForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.chimio_check.valid && (slideDeuxForm.controls.chimio_check.dirty || submitAttempt)">{{ 'FORM_CHIMIO_OPTION_2' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_CHIMIO_OPTION_2' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.chimio_check.valid && (slideDeuxForm.controls.chimio_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <p *ngIf="!slideDeuxForm.controls.chimio_check.valid  && (slideDeuxForm.controls.chimio_check.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
+    
+    <ion-list radio-group formControlName="therapie_check">
+      <p>{{ 'FORM_THERAPIE_CHECK' | translate }}</p>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.therapie_check.valid && (slideDeuxForm.controls.therapie_check.dirty || submitAttempt)">{{ 'FORM_THERAPIE_OPTION_1' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_THERAPIE_OPTION_1' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.therapie_check.valid && (slideDeuxForm.controls.therapie_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+      <ion-item no-lines>
+        <ion-label [class.invalid-bis]="!slideDeuxForm.controls.therapie_check.valid && (slideDeuxForm.controls.therapie_check.dirty || submitAttempt)">{{ 'FORM_THERAPIE_OPTION_2' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_THERAPIE_OPTION_2' | translate }}" [class.invalid-bis]="!slideDeuxForm.controls.therapie_check.valid && (slideDeuxForm.controls.therapie_check.dirty || submitAttempt)"></ion-radio>
+      </ion-item>
+    </ion-list>
+    <p *ngIf="!slideDeuxForm.controls.therapie_check.valid  && (slideDeuxForm.controls.therapie_check.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
+
+    <ion-item no-lines>
+      <ion-label floating>{{ 'FORM_NOM_TRAITEMENT' | translate }}</ion-label>
+      <ion-input [class.invalid]="!slideDeuxForm.controls.nom_traitement.valid && (slideDeuxForm.controls.nom_traitement.dirty || submitAttempt)" formControlName="nom_traitement" type="text"></ion-input>
+    </ion-item>
+    <p *ngIf="!slideDeuxForm.controls.nom_traitement.valid  && (slideDeuxForm.controls.nom_traitement.dirty || submitAttempt)">{{ 'FORM_NOM_TRAITEMENT_ALERTE' | translate }}</p>
+
+  </form>
+  <button class="ButtonValide" ion-button icon-end large clear (click)="nextPage()">
+    {{ 'TUTORIAL_CONTINUE_BUTTON' | translate }}
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
+</ion-content>
