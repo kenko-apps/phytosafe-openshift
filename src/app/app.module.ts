@@ -14,6 +14,7 @@ import { Maladie } from '../pages/formulaire/maladie/maladie';
 import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
 import { Inactif } from '../providers/inactif';
+import { Formulaire } from '../providers/formulaire';
 import { User } from '../providers/user';
 
 import { Camera } from '@ionic-native/camera';
@@ -77,6 +78,7 @@ export function HttpLoaderFactory(http: Http) {
     Api,
     Items,
     Inactif,
+    Formulaire,
     User,
     Camera,
     GoogleMaps,

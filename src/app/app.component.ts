@@ -6,8 +6,6 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { Accueil } from '../pages/accueil/accueil';
 
-import { Inactif } from '../providers/providers';
-
 import { TranslateService } from '@ngx-translate/core'
 
 @Component({
