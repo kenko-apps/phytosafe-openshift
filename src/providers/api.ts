@@ -3,7 +3,7 @@ import { Http, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /**
- * Ce service prend en charge les requêtes vers l'API REST côté client. Il faut déterminer l'URL avant tout chose.
+ * Ce service prend en charge les requêtes vers l'API REST côté client. Il faut déterminer l'URL avant toute chose.
  */
 @Injectable()
 export class Api {

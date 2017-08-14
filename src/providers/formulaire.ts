@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
+import { Storage } from '@ionic/storage';
 import { Api } from './api';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
-import { Storage } from '@ionic/storage';
 
 /**
  * Ce service permet de créer un formulaire, de le rempir et de le modifier. Il utilise les requêtes définies dans le fichier api.ts
@@ -25,11 +25,13 @@ export class Formulaire {
   constructor(public http: Http, public api: Api, public storage: Storage) { }
 
   /**
-   * Envoie une requête POST pour créer un nouveau formulaire côté serveur. Le formulaire créé n'a qu'un seul champ : l'id, identifiant unique qui permet d'identifier le formulaire. Cet id est généré côté serveur. Si le serveur renvoie une erreur, un id sera créé côté client.
+   * Envoie une requête POST pour créer un nouveau formulaire côté serveur. Ce formulaire est créé avec deux champs possédant une valeur : la date de création du formulaire, calculée côté client, et l'identifiant unique du formulaire, créé côté serveur. Le serveur renvoie cet identifiant unique qui est stocké localement côté client. 
+   * dateCrea est la date de création du formulaire.
    */
   createForm(dateCrea) {
     //Stockage local de la date de création du formulaire
-    this.storage.set("dateForm",dateCrea.dateID);
+    this.storage.set("dateForm",dateCrea.dateID).then(() => {
+      console.log('date enregistrée');});
     let seq = this.api.post('formulaire', dateCrea).share();
 
     seq
@@ -37,7 +39,8 @@ export class Formulaire {
       .subscribe(res => {
         // Si la requête est un succès, l'identifiant du formulaire est stocké localement
         if (res.status == 'success') {
-            this.storage.set("idForm", res.formres.id);
+          this.storage.set("idForm", res.formres.id).then(() => {
+            console.log('id enregistré');});
         }
       }, err => {
         console.error('ERROR', err);
