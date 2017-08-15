@@ -2,5 +2,19 @@
   "FONCTION_APPLI": "Description de la fonction de l'appli, à quoi elle sert.",
   "DISCLAIMER_APPLI": "Disclaimer pour dire qu'il faut faire attention aux résultats et que ce n'est pas une visite médicale.",
   "CONFIDENTIALITE_APPLI": "Pour rassurer les utilisateurs sur la confidentialité des données qu'ils entrent.",
-  "DEBUT_BOUTON": "Commencer le formulaire"
+  "DEBUT_BOUTON": "Commencer le formulaire",
+
+  "CONTINUE_BOUTON": "Continuer le formulaire",
+
+  "FORM_ALERTE" : "Veuillez remplir le formulaire correctement.",
+  "FORM_OPTION_ALERTE" : "Sélectionnez une option.",
+  "FORM_DONNEES_PERSONNELLES" : "Données personnelles",
+  "FORM_PRENOM" : "Prénom",
+  "FORM_PRENOM_ALERTE" : "Entrez un prénom valide.",
+  "FORM_NOM" : "Nom",
+  "FORM_NOM_ALERTE" : "Entrez un nom valide.",
+  "FORM_DATE_NAISSANCE" : "Date de naissance",
+  "FORM_DATE_NAISSANCE_ALERTE" : "Entrez une date de naissance.",
+  "FORM_ONCO_REF" : "Oncologue référent",
+  "FORM_ONCO_REF_ALERTE" : "Entrez un nom d'oncologue valide."
 }

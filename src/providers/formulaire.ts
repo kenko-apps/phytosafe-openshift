@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Storage } from '@ionic/storage';
 import { Api } from './api';
+import { LocalStockage } from './localstockage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 
@@ -12,7 +12,7 @@ import 'rxjs/add/operator/toPromise';
  * {
  *   status: 'success',
  *   formres: {
- *     // ce champ peut contenir l'id du formulaire, les champs remplis ou modifiés.
+ *     // ce champ doit contenir l'id du formulaire.
  *   }
  * }
  * ```
@@ -22,25 +22,46 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class Formulaire {
 
-  constructor(public http: Http, public api: Api, public storage: Storage) { }
+  public subCreate: any;
+
+  constructor(public http: Http, public api: Api, public localstockage: LocalStockage) { }
 
   /**
-   * Envoie une requête POST pour créer un nouveau formulaire côté serveur. Ce formulaire est créé avec deux champs possédant une valeur : la date de création du formulaire, calculée côté client, et l'identifiant unique du formulaire, créé côté serveur. Le serveur renvoie cet identifiant unique qui est stocké localement côté client. 
-   * dateCrea est la date de création du formulaire.
+   * Envoie une requête POST pour créer un nouveau formulaire côté serveur. Ce formulaire est créé avec deux champs possédant une valeur au minimum : la date de création du formulaire, calculée côté client, et l'identifiant unique du formulaire, créé côté serveur. Le serveur renvoie cet identifiant unique qui est stocké localement côté client.
+   * dataForm sont les champs à remplir côté serveur.
    */
-  createForm(dateCrea) {
-    //Stockage local de la date de création du formulaire
-    this.storage.set("dateForm",dateCrea.dateID).then(() => {
-      console.log('date enregistrée');});
-    let seq = this.api.post('formulaire', dateCrea).share();
+  createForm(dataForm) {
 
-    seq
+    if(this.subCreate) {
+       this.subCreate.unsubscribe();//On ne peut créer qu'un seul formulaire côté serveur. Il faut s'assurer qu'il n'y a pas une requête http en cours lorsqu'on envoie une requête de création du formulaire.
+    }
+    
+    this.subCreate = this.api.post('formulaire', dataForm).share();
+
+    this.subCreate
       .map(res => res.json())
       .subscribe(res => {
         // Si la requête est un succès, l'identifiant du formulaire est stocké localement
         if (res.status == 'success') {
-          this.storage.set("idForm", res.formres.id).then(() => {
-            console.log('id enregistré');});
+          this.localstockage.setData(JSON.parse(res.formres)); // Le stockage de l'identifiant du formulaire doit avoir le nom idForm.
+          this.localstockage.removeData(dataForm);//-- il faut ensuite supprimer toutes les données sauf l'id
+        }
+      }, err => {
+        console.error('ERROR', err);
+      });
+
+    return this.subCreate;
+  }
+
+  updateForm(idForm, dataForm) {
+    
+    let seq = this.api.patch('formulaire/' + idForm.toString(), dataForm).share();
+
+    seq
+      .map(res => res.json())
+      .subscribe(res => {
+        if (res.status == 'success') {
+          this.localstockage.removeData(dataForm); // il faut ensuite supprimer toutes les données sauf l'id
         }
       }, err => {
         console.error('ERROR', err);

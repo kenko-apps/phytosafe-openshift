@@ -47,8 +47,10 @@ export class Api {
     return this.http.delete(this.url + '/' + endpoint, options);
   }
 
-  //HTTP.PATCH can be used when the client is sending one or more changes to be applied by the the server. The PATCH method requests that a set of changes described in the request entity be applied to the resource identified by the Request-URI. The set of changes is represented in a format called a patch document.
-  patch(endpoint: string, body: any, options?: RequestOptions) {
+  //HTTP.PATCH can be used when the client is sending one or more changes to be applied by the server. The PATCH method requests that a set of changes described in the request entity be applied to the resource identified by the Request-URI. The set of changes is represented in a format called a patch document.
+  patch(endpoint: string, data: any, options?: RequestOptions) {
+    var body: any;
+    body = JSON.stringify(data);
     return this.http.put(this.url + '/' + endpoint, body, options);
   }
 }

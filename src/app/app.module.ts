@@ -15,6 +15,7 @@ import { Api } from '../providers/api';
 import { Items } from '../mocks/providers/items';
 import { Inactif } from '../providers/inactif';
 import { Formulaire } from '../providers/formulaire';
+import { LocalStockage } from '../providers/localstockage';
 import { User } from '../providers/user';
 
 import { Camera } from '@ionic-native/camera';
@@ -79,6 +80,7 @@ export function HttpLoaderFactory(http: Http) {
     Items,
     Inactif,
     Formulaire,
+    LocalStockage,
     User,
     Camera,
     GoogleMaps,
