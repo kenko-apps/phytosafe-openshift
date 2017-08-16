@@ -14,11 +14,13 @@ export class LocalStockage {
    * Stocke localement chacune des propriétés d'un objet.
    */
   setData(data) {
-    for(var propertyName in data) {
-      this.storage.set(propertyName,data[propertyName]).then(() => {
-        console.log('donnée enregistrée');});
-      console.log(propertyName + ' enregistré : ' + data[propertyName]);
-    }
+    return new Promise((resolve,reject) => {
+      for(var propertyName in data) {
+        console.log(propertyName + ' en cours d\'enregistrement : ' + data[propertyName]);
+        this.storage.set(propertyName,data[propertyName]);       
+      }
+      resolve('enregistré !');
+    });
   }
 
   /**
@@ -29,26 +31,41 @@ export class LocalStockage {
   }
 
   /**
-   * Supprime localement chacune des propriétés d'un objet.
+   * Supprime localement chacune des propriétés d'un objet, sauf l'identifiant unique.
    */
   removeData(data){
-    for(var propertyName in data) {
-      if (propertyName!="idForm"){
-        this.storage.remove(propertyName).then(() => {
-          console.log('donnée supprimée');});
-        console.log(propertyName + ' supprimée');
+    return new Promise((resolve, reject) => {
+      for(var propertyName in data) {
+        if (propertyName!="idForm"){
+          this.storage.remove(propertyName).then(() => {
+            console.log('donnée supprimée');});
+          console.log(propertyName + ' supprimée');
+        }
       }
-    }
+      resolve('Supression des données');
+    });
   }
 
   /**
    * Récupère toutes les données stockées localement.
    */
   getAllData(){
-    var data: object;
-    this.storage.forEach( (value, key, index) => {
-	    data[key]=value;
-    })
-    return data;
+    let data = {};
+    return new Promise((resolve, reject) => {
+      this.storage.forEach( (value, key, index) => {
+        if (typeof key === 'string' && key.endsWith('Form')){
+          data[key]=value;
+          console.log('la valeur est ' + value + ' et la key est ' + key);
+        }
+      });
+      resolve(data);
+    }); 
+  }
+
+  /**
+   * Supprime 
+   */
+  clearAllData(){
+      return this.storage.clear();
   }
 }

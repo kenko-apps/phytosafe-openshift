@@ -1,12 +1,13 @@
-import { Component, ViewChild } from '@angular/core';
-import { Platform, Nav, Config } from 'ionic-angular';
+import { Component} from '@angular/core';
+import { Platform, Config } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import { Storage } from '@ionic/storage';
 
 import { Accueil } from '../pages/accueil/accueil';
 
-import { TranslateService } from '@ngx-translate/core'
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   template: `<ion-nav [root]="rootPage"></ion-nav>`
@@ -14,16 +15,19 @@ import { TranslateService } from '@ngx-translate/core'
 export class MyApp {
   rootPage = Accueil;
 
-  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen) {
+  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private storage: Storage) {
     this.initTranslate();
   }
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
+      this.storage.ready().then(()=>{
+        //Suppression des valeurs stockées localement au lancement de l'application
+        this.storage.clear().then(()=>{  
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        });
+      });
     });
   }
 

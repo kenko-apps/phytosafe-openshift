@@ -36,10 +36,9 @@ export class Formulaire {
        this.subCreate.unsubscribe();//On ne peut créer qu'un seul formulaire côté serveur. Il faut s'assurer qu'il n'y a pas une requête http en cours lorsqu'on envoie une requête de création du formulaire.
     }
     
-    this.subCreate = this.api.post('formulaire', dataForm).share();
+    let seq = this.api.post('formulaire', dataForm).share();
 
-    this.subCreate
-      .map(res => res.json())
+    this.subCreate = seq.map(res => res.json())
       .subscribe(res => {
         // Si la requête est un succès, l'identifiant du formulaire est stocké localement
         if (res.status == 'success') {
@@ -50,15 +49,18 @@ export class Formulaire {
         console.error('ERROR', err);
       });
 
-    return this.subCreate;
+    return seq;
   }
 
   updateForm(idForm, dataForm) {
     
+    if(this.subCreate) {
+       this.subCreate.unsubscribe();//On ne peut créer qu'un seul formulaire côté serveur. Il faut s'assurer qu'il n'y a pas une requête http en cours lorsqu'on envoie une requête de création du formulaire.
+    }
+    
     let seq = this.api.patch('formulaire/' + idForm.toString(), dataForm).share();
 
-    seq
-      .map(res => res.json())
+    this.subCreate = seq.map(res => res.json())
       .subscribe(res => {
         if (res.status == 'success') {
           this.localstockage.removeData(dataForm); // il faut ensuite supprimer toutes les données sauf l'id
