@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import { Api } from './api';
-import { LocalStockage } from './localstockage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
+
+import { Api } from './api';
+import { LocalStockage } from './localstockage';
 
 /**
  * @class Formulaire - Ce service utilise les requêtes définies dans le fichier providers/api pour faire l'interface entre le client et le serveur.

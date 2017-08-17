@@ -12,11 +12,9 @@ import { DonneesPerso } from '../pages/formulaire/donnees-perso/donnees-perso';
 import { Maladie } from '../pages/formulaire/maladie/maladie';
 
 import { Api } from '../providers/api';
-import { Items } from '../mocks/providers/items';
 import { Inactif } from '../providers/inactif';
 import { Formulaire } from '../providers/formulaire';
 import { LocalStockage } from '../providers/localstockage';
-import { User } from '../providers/user';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -24,8 +22,7 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-// The translate loader needs to know where to load i18n files
-// in Ionic's static asset pipeline.
+// The translate loader needs to know where to load i18n files in Ionic's static asset pipeline.
 export function HttpLoaderFactory(http: Http) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -60,11 +57,9 @@ export function HttpLoaderFactory(http: Http) {
   ],
   providers: [
     Api,
-    Items,
     Inactif,
     Formulaire,
     LocalStockage,
-    User,
     SplashScreen,
     StatusBar,
     // Keep this to enable Ionic's runtime error handling during development

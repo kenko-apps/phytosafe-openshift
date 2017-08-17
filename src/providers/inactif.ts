@@ -77,12 +77,9 @@ export class Inactif {
         {
           text: buttonTextConfirm,
           handler: () =>{ 
-            //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement
-            this.localstockage.clearAllData().then(()=>{
-              timer.unsubscribe();
-              alert.dismiss().then(() => {
-                navCtrl.popToRoot();
-              });
+            timer.unsubscribe();
+            alert.dismiss().then(() => {
+              navCtrl.popToRoot();
             });
             return false;//La fermeture de l'alerte est faite manuellement, par alert.dismiss(), une fois la suppression des données effectuées.
           }
@@ -123,11 +120,9 @@ export class Inactif {
         alert.setSubTitle(sousTitrePrinc + count + sousTitreUnit);
       } else {
         //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement
-        this.localstockage.clearAllData().then(()=>{
-          timer.unsubscribe();
-          alert.dismiss().then(() => {
-            navCtrl.popToRoot();
-          });
+        timer.unsubscribe();
+        alert.dismiss().then(() => {
+          navCtrl.popToRoot();
         });
       }
     });
