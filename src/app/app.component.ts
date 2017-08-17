@@ -1,5 +1,5 @@
 import { Component} from '@angular/core';
-import { Platform, Config } from 'ionic-angular';
+import { Platform } from 'ionic-angular';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -15,14 +15,14 @@ import { TranslateService } from '@ngx-translate/core';
 export class MyApp {
   rootPage = Accueil;
 
-  constructor(private translate: TranslateService, private platform: Platform, private config: Config, private statusBar: StatusBar, private splashScreen: SplashScreen, private storage: Storage) {
+  constructor(private translate: TranslateService, private platform: Platform, private statusBar: StatusBar, private splashScreen: SplashScreen, private storage: Storage) {
     this.initTranslate();
   }
 
   ionViewDidLoad() {
     this.platform.ready().then(() => {
       this.storage.ready().then(()=>{
-        //Suppression des valeurs stockées localement au lancement de l'application
+        // Suppression des valeurs stockées localement au lancement de l'application
         this.storage.clear().then(()=>{  
           this.statusBar.styleDefault();
           this.splashScreen.hide();

@@ -3,15 +3,30 @@ import { Http, RequestOptions, URLSearchParams } from '@angular/http';
 import 'rxjs/add/operator/map';
 
 /**
- * Ce service prend en charge les requêtes vers l'API REST côté client. Il faut déterminer l'URL avant toute chose.
+ * @class Api - Ce service prend en charge les requêtes vers l'API REST côté client. Il faut, avant toute chose, déterminer l'URL de l'API.
+ * Les données échangées doivent être en format JSON. Les données reçues doivent toujours commencer par le champ 'status' :
+ * ```json
+ * {
+ *   status: 'success',
+ *   formres: {
+ *     // ce champ doit contenir a minima l'id du formulaire, stocké sous le nom idForm
+ *   }
+ * }
+ * ```
+ * Si le champ `status` n'est pas un `success`, une erreur est envoyée.
  */
+
 @Injectable()
 export class Api {
+  
   url: string = 'https://example.com/api/v1';
 
-  constructor(public http: Http) {
-  }
+  constructor(public http: Http) {}
 
+  /**
+   * Méthode qui envoie une requête GET à l'API pour récupérer des données. 
+   * @method get
+   */
   get(endpoint: string, params?: any, options?: RequestOptions) {
     if (!options) {
       options = new RequestOptions();
@@ -31,23 +46,39 @@ export class Api {
     return this.http.get(this.url + '/' + endpoint, options);
   }
 
-  //HTTP.POST can be used when the client is sending data to the server and the server will decide the URI for the newly created resource. The POST method is used to request that the origin server accept the entity enclosed in the request as a new subordinate of the resource identified by the Request-URI in the Request-Line.
+  /**
+   * Méthode qui envoie une requête POST à l'API pour envoyer des données sur le serveur. 
+   * Cette méthode est utilisée lorsque l'URI pour accéder à la ressource n'est pas encore créée et sera créée côté serveur. Les données envoyées seront donc dans un sous-domaine de l'URI utilisée pour envoyer les données.
+   * @method post
+   */
   post(endpoint: string, data: any, options?: RequestOptions) {
     var body: any;
     body = JSON.stringify(data);
     return this.http.post(this.url + '/' + endpoint, body, options);
   }
 
-  //HTTP.PUT can be used when the client is sending data to the the server and the client is determining the URI for the newly created resource. The PUT method requests that the enclosed entity be stored under the supplied Request-URI. If the Request-URI refers to an already existing resource, the enclosed entity SHOULD be considered as a modified version of the one residing on the origin server. If the Request-URI does not point to an existing resource, and that URI is capable of being defined as a new resource by the requesting user agent, the origin server can create the resource with that URI.
+  /**
+   * Méthode qui envoie une requête PUT à l'API pour envoyer des données sur le serveur. 
+   * Cette méthode est utilisée lorsque l'URI pour accéder à la ressource est déterminée par le client : c'est l'URI utilisée pour envoyer les données.
+   * @method put
+   */
   put(endpoint: string, body: any, options?: RequestOptions) {
     return this.http.put(this.url + '/' + endpoint, body, options);
   }
 
+  /**
+   * Méthode qui envoie une requête DELETE à l'API pour supprimer des données sur le serveur.
+   * @method delete
+   */
   delete(endpoint: string, options?: RequestOptions) {
     return this.http.delete(this.url + '/' + endpoint, options);
   }
 
-  //HTTP.PATCH can be used when the client is sending one or more changes to be applied by the server. The PATCH method requests that a set of changes described in the request entity be applied to the resource identified by the Request-URI. The set of changes is represented in a format called a patch document.
+  /**
+   * Méthode qui envoie une requête PATCH à l'API pour envoyer des données sur le serveur. 
+   * Cette méthode est utilisée lorsque les données envoyées sont une mise à jour d'une ressource déjà identifiée. Les données correspondent donc à un format attendu.
+   * @method patch
+   */
   patch(endpoint: string, data: any, options?: RequestOptions) {
     var body: any;
     body = JSON.stringify(data);

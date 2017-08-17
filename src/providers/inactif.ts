@@ -6,8 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocalStockage } from './localstockage';
 
 /**
- * Un service qui permet de vérifier si l'utilisateur est actif ou non.
+ * @class Inactif - Ce service permet de vérifier si l'utilisateur est actif ou pas, et le cas échéant de le renvoyer vers la page d'accueil du formulaire.
  */
+
 @Injectable()
 export class Inactif {
 
@@ -21,20 +22,44 @@ export class Inactif {
     idle.setInterrupts(DEFAULT_INTERRUPTSOURCES);
   }
 
+  /**
+   * Méthode qui lance la détection de l'inactivité de l'utilisateur, et qui, une fois l'inactivité détectée, ouvre une fenêtre d'alerte. 
+   * @method idleSet
+   * @requires providers/inactif - la fonction utilise la méthode idleRedirectConfirm.
+   * @param {Controller, Controller} - les deux controlleurs, qui correspondent à la page sur laquelle l'utilisateur est présent et à la fenêtre d'alerte sont passées à la méthode.
+   * @returns {} - aucune valeur n'est retournée par la méthode.
+   */
   idleSet(navCtrl,alertCtrl) {
     this.idle.watch();
     this.idleState = this.idle.onIdleStart.subscribe(()=>this.idleRedirectConfirm(navCtrl,alertCtrl));
   }
 
+  /**
+   * Méthode qui lance un timer.
+   * @method idleTimer
+   * @param {} - aucun paramètre n'est passé à la fonction.
+   * @returns {Observable} - un observable est renvoyé pour suivre l'état du timer.
+   */
   idleTimer(){  
     return Observable.timer(0,1000);
   }
 
-
+  /**
+   * Méthode qui ouvre une fenêtre d'alerte pour informer à l'utilisateur qu'il est inactif. 
+   * L'utilisateur peut soit confirmer la redirection vers la redirection vers la page d'accueil, soit l'annuler, soit attendre qu'il soit redirigé au terme d'un compte à rebours.
+   * La redirection s'accompagne d'une suppression de toutes les données stockées localement.
+   * @method idleRedirectConfirm
+   * @requires providers/inactif - la fonction utilise la méthode idleSet, idleTimer.
+   * @requires providers/localstockage - la fonction utilise la méthode clearAllData.
+   * @param {Controller, Controller} - les deux controlleurs, qui correspondent à la page sur laquelle l'utilisateur est présent et à la fenêtre d'alerte sont passées à la méthode.
+   * @returns {} - aucune valeur n'est retournée par la méthode.
+   */
   idleRedirectConfirm(navCtrl,alertCtrl) {
+    //Arrêt de la détection de l'inactivité de l'utilisateur
     this.idleState.unsubscribe();
     this.idle.stop();
 
+    //Création de la fenêtre d'alerte
     let buttonTextConfirm: string;
     let buttonTextCancel: string;
     this.translate.get('BOUTON_CONFIRM_ALERTE').subscribe(value => {
@@ -52,20 +77,21 @@ export class Inactif {
         {
           text: buttonTextConfirm,
           handler: () =>{ 
-            //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement.
+            //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement
             this.localstockage.clearAllData().then(()=>{
               timer.unsubscribe();
               alert.dismiss().then(() => {
                 navCtrl.popToRoot();
               });
             });
-            return false;//La fermeture de l'alerte est faite manuellement, une fois la suppression des données effectuées. 
+            return false;//La fermeture de l'alerte est faite manuellement, par alert.dismiss(), une fois la suppression des données effectuées.
           }
         },
         {
           text: buttonTextCancel,
           role: 'cancel',
           handler: () =>{
+            //Relance de la détection de l'inactivité de l'utilisateur
             this.idleSet(navCtrl,alertCtrl);
             timer.unsubscribe();
           }
@@ -82,6 +108,7 @@ export class Inactif {
     });
     alert.setTitle(titre);
     alert.setMessage(message);
+    //Création d'un compte à rebours qui, une fois à zéro, redirige l'utilisateur vers la page d'accueil du formulaire
     let timer = this.idleTimer().subscribe((t)=>{
       let count = this.idleCount-t;
       if (count>=0){
@@ -95,6 +122,7 @@ export class Inactif {
         });
         alert.setSubTitle(sousTitrePrinc + count + sousTitreUnit);
       } else {
+        //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement
         this.localstockage.clearAllData().then(()=>{
           timer.unsubscribe();
           alert.dismiss().then(() => {

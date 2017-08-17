@@ -14,6 +14,16 @@ export class Accueil {
 
   constructor(public navCtrl: NavController, public formulaire: Formulaire, public localstockage: LocalStockage) {}
 
+  /**
+   * Fonction qui est liée au bouton "Commencer le formulaire" sur la page d'accueil.
+   * Elle récupère la date et l'heure au moment où le bouton est cliqué et stocke cette valeur localement. 
+   * Une fois cette valeur stockée, elle crée un nouveau formulaire et affiche la première page du formulaire - Données Personnelles.
+   * @method nextPage
+   * @requires providers/formulaire - la fonction utilise la méthode setData.
+   * @requires providers/localstockage - la fonction utilise la méthode createForm.
+   * @param {} - aucun paramètre n'est passé à la fonction.
+   * @returns {} - aucune valeur n'est retournée par la fonction.
+   */
   nextPage() {
     //Date de création du nouveau formulaire
     interface dateObjet { dateForm: number };
