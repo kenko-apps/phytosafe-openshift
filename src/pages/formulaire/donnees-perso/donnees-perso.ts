@@ -16,7 +16,6 @@ import { LocalStockage } from '../../../providers/localstockage';
 })
 export class DonneesPerso {
 
-  idleState: any;
   donneesPersoForm: FormGroup;
   submitAttempt: boolean = false;
   
@@ -26,53 +25,8 @@ export class DonneesPerso {
         nomForm: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)'), Validators.required])],
         date_naissanceForm: ['', Validators.required]
     });
-    inactif.idleSet();
-    this.idleState = inactif.idleStart().subscribe(()=>this.redirectConfirm());
-  }
-
-  redirectConfirm() {
-    this.idleState.unsubscribe();
-    let alert = this.alertCtrl.create({
-      title: 'Attention',
-      subTitle: '',
-      message: 'Toutes les informations préalablement saisies seront perdues.',
-      buttons: [
-        {
-          text: 'OK',
-          handler: () =>{ 
-            //La redirection vers la page d'accueil est précédé d'une suppression des données stockées localement.
-            this.localstockage.clearAllData().then(()=>{
-              alert.dismiss().then(() => {
-                this.navCtrl.popToRoot();
-              });
-            });
-            return false;//La fermeture de l'alerte est faite manuellement, une fois la suppression des données effectuées. 
-          }
-        },
-        {
-          text: 'Annuler',
-          role: 'cancel',
-          handler: () =>{
-            this.inactif.idleSet();
-            this.idleState = this.inactif.idleStart().subscribe(()=>this.redirectConfirm());
-            timer.unsubscribe();
-          }
-        }
-      ]
-    });
-    alert.present();
-    let timer = this.inactif.idleTimer().subscribe((t)=>{
-      let idleCount = this.inactif.idleCount-t;
-      if (idleCount>=0){
-        alert.setSubTitle('Vous allez être redirigé vers la page d\'accueil du formulaire dans ' + idleCount + ' secondes.');
-      } else {
-        this.localstockage.clearAllData().then(()=>{
-          alert.dismiss().then(() => {
-            this.navCtrl.popToRoot();
-          });
-        });
-      }
-    });
+    //Si l'utilisateur est inactif, une alerte est envoyée avec la possibilité de continuer ou de recommencer le questionnaire.
+    inactif.idleSet(navCtrl,alertCtrl);
   }
 
   nextPage() {

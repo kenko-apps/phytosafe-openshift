@@ -63,7 +63,7 @@ export class LocalStockage {
   }
 
   /**
-   * Supprime 
+   * Supprime toutes les données stockées localement. 
    */
   clearAllData(){
       return this.storage.clear();

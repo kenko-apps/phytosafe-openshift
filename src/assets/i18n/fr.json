@@ -6,6 +6,13 @@
 
   "CONTINUE_BOUTON": "Continuer le formulaire",
 
+  "TITRE_ALERTE": "Attention !",
+  "SOUSTITRE_ALERTE": "Vous allez être redirigé vers la page d'accueil du formulaire dans ",
+  "SOUSTITRE_UNIT_ALERTE": " secondes.",
+  "MESSAGE_ALERTE": "Toutes les informations préalablement saisies seront perdues.",
+  "BOUTON_CONFIRM_ALERTE": "OK",
+  "BOUTON_ANNUL_ALERTE": "Annuler",
+
   "FORM_ALERTE" : "Veuillez remplir le formulaire correctement.",
   "FORM_OPTION_ALERTE" : "Sélectionnez une option.",
   "FORM_DONNEES_PERSONNELLES" : "Données personnelles",
