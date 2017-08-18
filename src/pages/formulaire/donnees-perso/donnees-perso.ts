@@ -27,7 +27,7 @@ export class DonneesPerso {
         date_naissanceForm: ['', Validators.required]
     });
     //Si l'utilisateur est inactif, une alerte est envoyée avec la possibilité de continuer ou de recommencer le questionnaire.
-    inactif.idleSet(navCtrl,alertCtrl);
+    //inactif.idleSet(navCtrl,alertCtrl);
   }
 
   /**
@@ -64,7 +64,7 @@ export class DonneesPerso {
           });
         });
 
-        //Navigation à la première page du formulaire - Données personnelles
+        //Navigation à la deuxième page du formulaire - Maladie
         this.navCtrl.push(Maladie);
 
       });

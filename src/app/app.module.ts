@@ -10,11 +10,13 @@ import { MyApp } from './app.component';
 import { Accueil } from '../pages/accueil/accueil';
 import { DonneesPerso } from '../pages/formulaire/donnees-perso/donnees-perso';
 import { Maladie } from '../pages/formulaire/maladie/maladie';
+import { Autocomplete } from '../pages/autocomplete/autocomplete';
 
 import { Api } from '../providers/api';
 import { Inactif } from '../providers/inactif';
 import { Formulaire } from '../providers/formulaire';
 import { LocalStockage } from '../providers/localstockage';
+import { Diacritics } from '../providers/diacritics';
 
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -32,7 +34,8 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     Accueil,
     DonneesPerso,
-    Maladie
+    Maladie,
+    Autocomplete
   ],
   imports: [
     BrowserModule,
@@ -53,13 +56,15 @@ export function HttpLoaderFactory(http: Http) {
     MyApp,
     Accueil,
     DonneesPerso,
-    Maladie
+    Maladie,
+    Autocomplete
   ],
   providers: [
     Api,
     Inactif,
     Formulaire,
     LocalStockage,
+    Diacritics,
     SplashScreen,
     StatusBar,
     // Keep this to enable Ionic's runtime error handling during development

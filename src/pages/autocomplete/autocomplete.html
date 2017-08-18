@@ -1,0 +1,13 @@
+<ion-header>
+    <ion-toolbar>
+      <ion-title>Organe primitif atteint</ion-title>
+      <ion-searchbar placeholder="nom de l'organe" [(ngModel)]="autocompleteEntry.query" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()" (search)="search()"></ion-searchbar>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content>
+    <ion-list>
+      <ion-item *ngFor="let item of autocompleteItems" (click)="chooseItem(item)">
+        {{ item }}
+      </ion-item>
+    </ion-list>
+  </ion-content>

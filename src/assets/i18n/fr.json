@@ -5,6 +5,8 @@
   "DEBUT_BOUTON": "Commencer le formulaire",
 
   "CONTINUE_BOUTON": "Continuer le formulaire",
+  "FORM_ALERTE" : "Veuillez remplir le formulaire correctement.",
+  "FORM_OPTION_ALERTE" : "Sélectionnez une option.",
 
   "TITRE_ALERTE": "Attention !",
   "SOUSTITRE_ALERTE": "Vous allez être redirigé vers la page d'accueil du formulaire dans ",
@@ -13,8 +15,6 @@
   "BOUTON_CONFIRM_ALERTE": "OK",
   "BOUTON_ANNUL_ALERTE": "Annuler",
 
-  "FORM_ALERTE" : "Veuillez remplir le formulaire correctement.",
-  "FORM_OPTION_ALERTE" : "Sélectionnez une option.",
   "FORM_DONNEES_PERSONNELLES" : "Données personnelles",
   "FORM_PRENOM" : "Prénom",
   "FORM_PRENOM_ALERTE" : "Entrez un prénom valide.",
@@ -22,6 +22,21 @@
   "FORM_NOM_ALERTE" : "Entrez un nom valide.",
   "FORM_DATE_NAISSANCE" : "Date de naissance",
   "FORM_DATE_NAISSANCE_ALERTE" : "Entrez une date de naissance.",
+  
+  "FORM_MALADIE" : "Maladie",
+  "FORM_ORGANE_PRIMITIF" : "Organe primitif atteint",
+  "FORM_ORGANE_PRIMITIF_ALERTE" : "Entrez un nom d'organe valide.",
+  "FORM_DATE_DIAGNOSTIC" : "Date du diagnostic",
+  "FORM_DATE_DIAGNOSTIC_ALERTE" : "Entrez une date de diagnostic.",
+  "FORM_MALADIE_CHECK" : "Stade de la maladie",
+  "FORM_MALADIE_OPTION_1" : "tumeur locale",
+  "FORM_MALADIE_OPTION_2" : "tumeur métastasée",
+  "FORM_NOM_TRAITEMENT" : "Nom du traitement anti-cancéreux",
+  "FORM_NOM_TRAITEMENT_ALERTE" : "Entrez un nom de traitement valide.",
+  "FORM_RADIO_CHECK" : "Radiothérapie",
+  "FORM_RADIO_OPTION_1": "oui",
+  "FORM_RADIO_OPTION_2": "prévue",
+  "FORM_RADIO_OPTION_3": "non",
   "FORM_ONCO_REF" : "Oncologue référent",
   "FORM_ONCO_REF_ALERTE" : "Entrez un nom d'oncologue valide."
 }
