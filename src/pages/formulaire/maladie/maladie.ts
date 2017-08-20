@@ -9,6 +9,7 @@ import{ Autocomplete } from '../../autocomplete/autocomplete';
 
 import { Formulaire } from '../../../providers/formulaire';
 import { LocalStockage } from '../../../providers/localstockage';
+import { Traitement } from '../../../providers/traitement';
 
 @Component({
   selector: 'maladie',
@@ -18,7 +19,9 @@ export class Maladie {
 
   maladieForm: FormGroup;
   submitAttempt: boolean = false;
-  organe=[
+  organeTitre: string;
+  organePlaceholder: string;
+  organeNom = [
     "coeur",
     "sein",
     "côlon",
@@ -32,8 +35,11 @@ export class Maladie {
     "testicules",
     "poumons"
   ];
-
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController, translate: TranslateService, public formBuilder: FormBuilder, public formulaire: Formulaire, public localstockage: LocalStockage) {
+  traitementNom = [];
+  traitementTitre: string;
+  traitementPlaceholder: string;
+  
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public translate: TranslateService, public formBuilder: FormBuilder, public formulaire: Formulaire, public localstockage: LocalStockage, public traitement: Traitement) {
     this.maladieForm = formBuilder.group({
         organe_primitif: ['', Validators.compose([ Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)'), Validators.required])],
         date_diagnostic: ['', Validators.required],
@@ -42,15 +48,44 @@ export class Maladie {
         radio_check:  ['', Validators.required],
         onco_ref: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ. ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)')])],
     });
+    traitement.getTrait().toPromise().then((res) => {
+      this.traitementNom = [res.blob];//A VERIFIER - BLOB PERMET DE RETROUVER LE BODY DE LA REPONSE!!
+    }).catch((err)=>{
+      console.error('ERROR', err);
+    });
   }
 
   showOrganeModal(){
-    let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.organe});
+    this.translate.get('TITRE_MODAL_ORGANE').subscribe(value => {
+      this.organeTitre = value;
+    });
+    this.translate.get('PLACEHOLDER_MODAL_ORGANE').subscribe(value => {
+      this.organePlaceholder = value;
+    });
+    let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.organeNom, titreAutocomplete: this.organeTitre, placeholderAutocomplete: this.organePlaceholder});
     modal.onDidDismiss(data => {
       console.log(data);
       this.maladieForm.patchValue({organe_primitif: data});
     });
     modal.present();
+  }
+
+  showTraitementModal(){
+    console.log(this.traitementNom);
+    if (this.traitementNom.length > 0){
+      this.translate.get('TITRE_MODAL_TRAITEMENT').subscribe(value => {
+        this.traitementTitre = value;
+      });
+      this.translate.get('PLACEHOLDER_MODAL_TRAITEMENT').subscribe(value => {
+        this.traitementPlaceholder = value;
+      });
+      let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.traitementNom, titreAutocomplete: this.traitementTitre, placeholderAutocomplete: this.traitementPlaceholder});
+      modal.onDidDismiss(data => {
+        console.log(data);
+        this.maladieForm.patchValue({nom_traitement: data});
+      });
+      modal.present();
+    };
   }
 
   /**

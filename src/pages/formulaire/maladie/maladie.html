@@ -39,7 +39,7 @@
 
     <ion-item no-lines>
       <ion-label floating>{{ 'FORM_NOM_TRAITEMENT' | translate }}</ion-label>
-      <ion-input [class.invalid]="!maladieForm.controls.nom_traitement.valid && (maladieForm.controls.nom_traitement.dirty || submitAttempt)" formControlName="nom_traitement" type="text"></ion-input>
+      <ion-input (click)="showTraitementModal()" [class.invalid]="!maladieForm.controls.nom_traitement.valid && (maladieForm.controls.nom_traitement.dirty || submitAttempt)" formControlName="nom_traitement" type="text"></ion-input>
     </ion-item>
     <p *ngIf="!maladieForm.controls.nom_traitement.valid  && (maladieForm.controls.nom_traitement.dirty || submitAttempt)">{{ 'FORM_NOM_TRAITEMENT_ALERTE' | translate }}</p>
 

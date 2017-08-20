@@ -59,7 +59,7 @@ export class LocalStockage {
 
   /**
    * Méthode qui récupère l'ensemble des données stockées localement.
-   * @method getAllData 
+   * @method getAllData
    * @param {} - aucun paramètre n'est passé à la méthode.
    * @returns {Promise} - une promesse est renvoyée avec les valeurs des donnés stockées sous la forme d'un objet. 
    */

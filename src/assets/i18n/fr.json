@@ -15,6 +15,11 @@
   "BOUTON_CONFIRM_ALERTE": "OK",
   "BOUTON_ANNUL_ALERTE": "Annuler",
 
+  "TITRE_MODAL_ORGANE": "Organe primitif atteint",
+  "PLACEHOLDER_MODAL_ORGANE": "nom de l'organe",
+  "TITRE_MODAL_TRAITEMENT": "Nom du traitement anti-cancéreux",
+  "PLACEHOLDER_MODAL_TRAITEMENT": "nom du traitement",
+
   "FORM_DONNEES_PERSONNELLES" : "Données personnelles",
   "FORM_PRENOM" : "Prénom",
   "FORM_PRENOM_ALERTE" : "Entrez un prénom valide.",

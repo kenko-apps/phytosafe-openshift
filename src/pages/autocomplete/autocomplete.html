@@ -1,7 +1,7 @@
 <ion-header>
     <ion-toolbar>
-      <ion-title>Organe primitif atteint</ion-title>
-      <ion-searchbar placeholder="nom de l'organe" [(ngModel)]="autocompleteEntry.query" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()" (search)="search()"></ion-searchbar>
+      <ion-title>{{this.params.get('titreAutocomplete')}}</ion-title>
+      <ion-searchbar placeholder="{{this.params.get('placeholderAutocomplete')}}" [(ngModel)]="autocompleteEntry.query" [showCancelButton]="true" (ionInput)="updateSearch()" (ionCancel)="dismiss()" (search)="search()"></ion-searchbar>
     </ion-toolbar>
   </ion-header>
   <ion-content>
