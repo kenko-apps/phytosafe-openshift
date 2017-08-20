@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 
 
 /**
- * @class 
+ * @class Diacritics - Ce service recence l'ensemble des caractères spéciaux qui peuvent être remplacés par des caractères simples lors d'une saisie de l'utilisateur.
+ * Il facilite la comparaison entre les données saisies et celles attendues, notamment lors de l'autocompletion.
  */
 
 @Injectable()
@@ -100,8 +101,10 @@ export class Diacritics {
   }
 
   /**
-   * Méthode 
-   * @method get
+   * Méthode qui envoie remplace l'ensemble des caractères spéciaux par leurs équivalents plus simples.
+   * @method replaceDiacritics
+   * @param {string} - une chaîne de caractère est passé à la méthode.
+   * @returns {string} - une chaîne de caractère est renvoyée, dans laquelle tous les caractères spéciaux ont été remplacés.
    */
   replaceDiacritics(strVal) {
     for(var i=0; i<this.defaultDiacritics.length; i++) {

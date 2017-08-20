@@ -55,6 +55,14 @@ export class Maladie {
     });
   }
 
+  /**
+   * Fonction qui est liée au champ "Organe primitif atteint" sur la deuxième page du formulaire - Maladie.
+   * Elle permet d'ouvrir une page modale (pages/autocomplete) qui propose, en fonction des entrées de l'utilisateur une liste de noms possibles : autocompletion.
+   * @method showOrganeModal
+   * @requires pages/autocomplete - elle appelle la page autocomplete.ts.
+   * @param {} - aucun paramètre n'est passé à la fonction.
+   * @returns {} - aucune valeur n'est retournée par la fonction.
+   */
   showOrganeModal(){
     this.translate.get('TITRE_MODAL_ORGANE').subscribe(value => {
       this.organeTitre = value;
@@ -70,6 +78,14 @@ export class Maladie {
     modal.present();
   }
 
+  /**
+   * Fonction qui est liée au champ "Nom du traitement anti-cancéreux" sur la deuxième page du formulaire - Maladie.
+   * Elle permet d'ouvrir une page modale (pages/autocomplete) qui propose, en fonction des entrées de l'utilisateur une liste de noms possibles : autocompletion.
+   * @method showOrganeModal
+   * @requires pages/autocomplete - elle appelle la page autocomplete.ts.
+   * @param {} - aucun paramètre n'est passé à la fonction.
+   * @returns {} - aucune valeur n'est retournée par la fonction.
+   */
   showTraitementModal(){
     console.log(this.traitementNom);
     if (this.traitementNom.length > 0){
