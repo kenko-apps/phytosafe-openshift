@@ -37,8 +37,8 @@ export class DonneesPerso {
    * Si aucun identifiant n'a été stocké, elle créé un nouveau formulaire avec toutes les données stockées. Sinon, elle met à jour le formulaire avec ces mêmes données.
    * Elle affiche ensuite la deuxième page du formulaire - Maladie.
    * @method nextPage
-   * @requires providers/formulaire - la fonction utilise les méthodes setData, getData, getAllData.
-   * @requires providers/localstockage - la fonction utilise les méthodes createForm et updateForm.
+   * @requires providers/localstockage - la fonction utilise les méthodes setData, getData, getAllData.
+   * @requires providers/formulaire - la fonction utilise les méthodes createForm et updateForm.
    * @param {} - aucun paramètre n'est passé à la fonction.
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */
@@ -48,7 +48,7 @@ export class DonneesPerso {
 
       //Stockage local des données remplies dans cette page de formulaire
       this.localstockage.setData(this.donneesPersoForm.value).then((message) => {
-        console.log('Données Personnelles : ' + message)
+        console.log('Données Personnelles : ' + message);
 
         //Mise à jour/création du formulaire sur le serveur avec les données entrées sur cette page du formulaire
         this.localstockage.getData("idForm").then((val)=> {

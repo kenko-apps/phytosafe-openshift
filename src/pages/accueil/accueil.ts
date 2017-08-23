@@ -19,8 +19,8 @@ export class Accueil {
    * Elle récupère la date et l'heure au moment où le bouton est cliqué et stocke cette valeur localement. 
    * Une fois cette valeur stockée, elle crée un nouveau formulaire et affiche la première page du formulaire - Données Personnelles.
    * @method nextPage
-   * @requires providers/formulaire - la fonction utilise la méthode setData.
-   * @requires providers/localstockage - la fonction utilise la méthode createForm.
+   * @requires providers/localstockage - la fonction utilise la méthode setData.
+   * @requires providers/formulaire - la fonction utilise la méthode createForm.
    * @param {} - aucun paramètre n'est passé à la fonction.
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */

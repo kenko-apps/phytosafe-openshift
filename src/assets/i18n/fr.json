@@ -18,6 +18,7 @@
   "TITRE_MODAL_ORGANE": "Organe primitif atteint",
   "PLACEHOLDER_MODAL_ORGANE": "nom de l'organe",
   "TITRE_MODAL_TRAITEMENT": "Nom du traitement anti-cancéreux",
+  "TITRE_MODAL_TRAITEMENT_BIS": "Thérapie alternative",
   "PLACEHOLDER_MODAL_TRAITEMENT": "nom du traitement",
 
   "FORM_DONNEES_PERSONNELLES" : "Données personnelles",
@@ -43,5 +44,25 @@
   "FORM_RADIO_OPTION_2": "prévue",
   "FORM_RADIO_OPTION_3": "non",
   "FORM_ONCO_REF" : "Oncologue référent",
-  "FORM_ONCO_REF_ALERTE" : "Entrez un nom d'oncologue valide."
+  "FORM_ONCO_REF_ALERTE" : "Entrez un nom d'oncologue valide.",
+  
+  "FORM_THERAPIES_ALTERNATIVES" : "Thérapies alternatives",
+  "FORM_THERAPIES_CHECK" : "Avez-vous recours à des thérapies alternatives ?",
+  "FORM_THERAPIE_OUI" : "oui",
+  "FORM_THERAPIE_NON" : "non",
+  "FORM_THERAPIES_TYPES" : "Quelles thérapies alternatives utilisez-vous ?",
+  "FORM_THERAPIES_OPTION_1" : "phytothérapie",
+  "FORM_THERAPIES_OPTION_2" : "homéopathie",
+  "FORM_THERAPIES_OPTION_3" : "aromathérapie",
+  "FORM_THERAPIES_OPTION_4" : "autres",
+  "FORM_CHECK_THERAPIE_ALERTE" : "Précisez les thérapies utilisées.",
+  
+  "FORM_PHYTO" : "Thérapies alternatives",
+  "FORM_PHYTO_NOM" : "Nom du traitement",
+  "FORM_PHYTO_NOM_ALERTE" : "Entrez un nom de traitement valide.",
+  "FORM_PHYTO_DATE" : "Date de début du traitement",
+  "FORM_PHYTO_PLUS" : "Ajouter un traitement",
+
+  "FORM_RESULTAT" : "Résultats du formulaire",
+  "FORM_RESULTAT_INTITULE" : "C'est fini"
 }

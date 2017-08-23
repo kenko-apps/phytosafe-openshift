@@ -53,7 +53,7 @@ export class Formulaire {
           this.localstockage.removeData(dataForm);//Il faut ensuite supprimer toutes les données qui ont été enregistrées sur le serveur, sauf l'identifiant du formulaire.
         }
       }, err => {
-        console.error('ERROR', err);
+        //console.error('ERROR', err);
       });
 
     return seq;
@@ -82,7 +82,7 @@ export class Formulaire {
           this.localstockage.removeData(dataForm);//Il faut ensuite supprimer toutes les données qui ont été enregistrées sur le serveur, sauf l'identifiant du formulaire.
         }
       }, err => {
-        console.error('ERROR', err);
+        //console.error('ERROR', err);
       });
 
     return seq;

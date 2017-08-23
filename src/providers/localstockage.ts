@@ -20,7 +20,7 @@ export class LocalStockage {
     return new Promise((resolve,reject) => {
       //Décomposition des propriétés de l'objet en paire clé/valeur
       for(var propertyName in data) {
-        console.log(propertyName + ' en cours d\'enregistrement : ' + data[propertyName]);
+        //console.log(propertyName + ' en cours d\'enregistrement : ' + data[propertyName]);
         this.storage.set(propertyName,data[propertyName]);//Enregistrement de la paire clé/valeur
       }
       resolve('enregistré !');
@@ -49,7 +49,8 @@ export class LocalStockage {
         //L'identifiant unique, qui peut être une des propriétés de l'objet data, n'est pas supprimé.
         if (propertyName!="idForm"){
           this.storage.remove(propertyName).then(() => {
-            console.log('donnée supprimée');});
+            console.log('donnée supprimée');
+          });
           console.log(propertyName + ' supprimée');
         }
       }

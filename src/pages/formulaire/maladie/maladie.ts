@@ -4,7 +4,7 @@ import { NavController, ModalController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
 
-//import { Maladie } from '../maladie/maladie';
+import { TherapiesAlter } from '../therapies-alter/therapies-alter';
 import{ Autocomplete } from '../../autocomplete/autocomplete';
 
 import { Formulaire } from '../../../providers/formulaire';
@@ -39,14 +39,14 @@ export class Maladie {
   traitementTitre: string;
   traitementPlaceholder: string;
   
-  constructor(public navCtrl: NavController, public modalCtrl: ModalController,public translate: TranslateService, public formBuilder: FormBuilder, public formulaire: Formulaire, public localstockage: LocalStockage, public traitement: Traitement) {
+  constructor(public navCtrl: NavController, public modalCtrl: ModalController, public translate: TranslateService, public formBuilder: FormBuilder, public formulaire: Formulaire, public localstockage: LocalStockage, public traitement: Traitement) {
     this.maladieForm = formBuilder.group({
-        organe_primitif: ['', Validators.compose([ Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)'), Validators.required])],
-        date_diagnostic: ['', Validators.required],
-        maladie_check:  ['', Validators.required],
-        nom_traitement: ['',Validators.compose([ Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]*)'), Validators.required])],
-        radio_check:  ['', Validators.required],
-        onco_ref: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ. ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)')])],
+        organeForm: ['', Validators.compose([ Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)'), Validators.required])],
+        diagnosticForm: ['', Validators.required],
+        etatForm:  ['', Validators.required],
+        traitementForm: ['',Validators.compose([ Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)([\-]*)'), Validators.required])],
+        radioForm:  ['', Validators.required],
+        oncoForm: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ. ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)')])]
     });
     traitement.getTrait().toPromise().then((res) => {
       this.traitementNom = [res.blob];//A VERIFIER - BLOB PERMET DE RETROUVER LE BODY DE LA REPONSE!!
@@ -70,10 +70,10 @@ export class Maladie {
     this.translate.get('PLACEHOLDER_MODAL_ORGANE').subscribe(value => {
       this.organePlaceholder = value;
     });
-    let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.organeNom, titreAutocomplete: this.organeTitre, placeholderAutocomplete: this.organePlaceholder});
+    let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.organeNom, titreAutocomplete: this.organeTitre, placeholderAutocomplete: this.organePlaceholder, enterAutocomplete: true});
     modal.onDidDismiss(data => {
-      console.log(data);
-      this.maladieForm.patchValue({organe_primitif: data});
+      //console.log(data);
+      this.maladieForm.patchValue({organeForm: data});
     });
     modal.present();
   }
@@ -87,7 +87,7 @@ export class Maladie {
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */
   showTraitementModal(){
-    console.log(this.traitementNom);
+    //console.log(this.traitementNom);
     if (this.traitementNom.length > 0){
       this.translate.get('TITRE_MODAL_TRAITEMENT').subscribe(value => {
         this.traitementTitre = value;
@@ -95,10 +95,10 @@ export class Maladie {
       this.translate.get('PLACEHOLDER_MODAL_TRAITEMENT').subscribe(value => {
         this.traitementPlaceholder = value;
       });
-      let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.traitementNom, titreAutocomplete: this.traitementTitre, placeholderAutocomplete: this.traitementPlaceholder});
+      let modal = this.modalCtrl.create(Autocomplete, {dataAutocomplete: this.traitementNom, titreAutocomplete: this.traitementTitre, placeholderAutocomplete: this.traitementPlaceholder, enterAutocomplete: false});
       modal.onDidDismiss(data => {
-        console.log(data);
-        this.maladieForm.patchValue({nom_traitement: data});
+        //console.log(data);
+        this.maladieForm.patchValue({traitementForm: data});
       });
       modal.present();
     };
@@ -111,8 +111,8 @@ export class Maladie {
    * Si aucun identifiant n'a été stocké, elle créé un nouveau formulaire avec toutes les données stockées. Sinon, elle met à jour le formulaire avec ces mêmes données.
    * Elle affiche ensuite la troisième page du formulaire - Traitements Alternatifs.
    * @method nextPage
-   * @requires providers/formulaire - la fonction utilise les méthodes setData, getData, getAllData.
-   * @requires providers/localstockage - la fonction utilise les méthodes createForm et updateForm.
+   * @requires providers/localstockage - la fonction utilise les méthodes setData, getData, getAllData.
+   * @requires providers/formulaire - la fonction utilise les méthodes createForm et updateForm.
    * @param {} - aucun paramètre n'est passé à la fonction.
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */
@@ -122,7 +122,7 @@ export class Maladie {
 
       //Stockage local des données remplies dans cette page de formulaire
       this.localstockage.setData(this.maladieForm.value).then((message) => {
-        console.log('Données Personnelles : ' + message)
+        console.log('Maladie : ' + message);
 
         //Mise à jour/création du formulaire sur le serveur avec les données entrées sur cette page du formulaire
         this.localstockage.getData("idForm").then((val)=> {
@@ -139,7 +139,7 @@ export class Maladie {
         });
 
         //Navigation à la troisième page du formulaire - Traitements Alternatifs
-        //this.navCtrl.push(Maladie);
+        this.navCtrl.push(TherapiesAlter);
 
       });
     }

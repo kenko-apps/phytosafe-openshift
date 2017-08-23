@@ -46,8 +46,10 @@ export class Autocomplete {
    * @param {} - aucun paramètre n'est passé à la fonction.
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */
-  search() {
-    this.viewCtrl.dismiss(this.autocompleteEntry.query);
+  enterItem(keyCode) {
+    if (this.params.get('enterAutocomplete')==true && keyCode==13){
+      this.viewCtrl.dismiss(this.autocompleteEntry.query);
+    }
   }
 
   /**

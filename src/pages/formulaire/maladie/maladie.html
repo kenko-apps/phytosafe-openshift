@@ -12,59 +12,59 @@
 
     <ion-item no-lines>
       <ion-label floating>{{ 'FORM_ORGANE_PRIMITIF' | translate }}</ion-label>
-      <ion-input (click)="showOrganeModal()" [class.invalid]="!maladieForm.controls.organe_primitif.valid && (maladieForm.controls.organe_primitif.dirty || submitAttempt)" formControlName="organe_primitif" type="text"></ion-input>
+      <ion-input (click)="showOrganeModal()" [class.invalid]="!maladieForm.controls.organeForm.valid && (maladieForm.controls.organeForm.dirty || submitAttempt)" formControlName="organeForm" type="text"></ion-input>
     </ion-item>
-    <p *ngIf="!maladieForm.controls.organe_primitif.valid  && (maladieForm.controls.organe_primitif.dirty || submitAttempt)">{{ 'FORM_ORGANE_PRIMITIF_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.organeForm.valid  && (maladieForm.controls.organeForm.dirty || submitAttempt)">{{ 'FORM_ORGANE_PRIMITIF_ALERTE' | translate }}</p>
 
     <ion-item no-lines>
       <ion-label floating>{{ 'FORM_DATE_DIAGNOSTIC' | translate }}</ion-label>
-      <ion-datetime cancelText="annuler" doneText="valider" [class.invalid]="!maladieForm.controls.date_diagnostic.valid && (maladieForm.controls.date_diagnostic.dirty || submitAttempt)" formControlName="date_diagnostic" displayFormat="DD MMM YYYY" 
+      <ion-datetime cancelText="annuler" doneText="valider" [class.invalid]="!maladieForm.controls.diagnosticForm.valid && (maladieForm.controls.diagnosticForm.dirty || submitAttempt)" formControlName="diagnosticForm" displayFormat="DD MMM YYYY" 
         monthShortNames="jan, f\u00e9v, mars, avr, mai, juin, juil, ao\u00fbt, sept, oct, nov, d\u00e9c">
       </ion-datetime>
     </ion-item>
-    <p *ngIf="!maladieForm.controls.date_diagnostic.valid  && (maladieForm.controls.date_diagnostic.dirty || submitAttempt)">{{ 'FORM_DATE_DIAGNOSTIC_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.diagnosticForm.valid  && (maladieForm.controls.diagnosticForm.dirty || submitAttempt)">{{ 'FORM_DATE_DIAGNOSTIC_ALERTE' | translate }}</p>
 
-    <ion-list radio-group formControlName="maladie_check">
+    <ion-list radio-group formControlName="etatForm">
       <p>{{ 'FORM_MALADIE_CHECK' | translate }}</p>
       <ion-item no-lines>
-        <ion-label [class.invalid-bis]="!maladieForm.controls.maladie_check.valid && (maladieForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_1' | translate }}</ion-label>
-        <ion-radio value="{{ 'FORM_MALADIE_OPTION_1' | translate }}" [class.invalid-bis]="!maladieForm.controls.maladie_check.valid && (maladieForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+        <ion-label [class.invalid-bis]="!maladieForm.controls.etatForm.valid && (maladieForm.controls.etatForm.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_1' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_MALADIE_OPTION_1' | translate }}" [class.invalid-bis]="!maladieForm.controls.etatForm.valid && (maladieForm.controls.etatForm.dirty || submitAttempt)"></ion-radio>
       </ion-item>
       <ion-item no-lines>
-        <ion-label [class.invalid-bis]="!maladieForm.controls.maladie_check.valid && (maladieForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_2' | translate }}</ion-label>
-        <ion-radio value="{{ 'FORM_MALADIE_OPTION_2' | translate }}" [class.invalid-bis]="!maladieForm.controls.maladie_check.valid && (maladieForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+        <ion-label [class.invalid-bis]="!maladieForm.controls.etatForm.valid && (maladieForm.controls.etatForm.dirty || submitAttempt)">{{ 'FORM_MALADIE_OPTION_2' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_MALADIE_OPTION_2' | translate }}" [class.invalid-bis]="!maladieForm.controls.etatForm.valid && (maladieForm.controls.etatForm.dirty || submitAttempt)"></ion-radio>
       </ion-item>
     </ion-list>
-    <p *ngIf="!maladieForm.controls.maladie_check.valid  && (maladieForm.controls.maladie_check.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.etatForm.valid  && (maladieForm.controls.etatForm.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
 
     <ion-item no-lines>
       <ion-label floating>{{ 'FORM_NOM_TRAITEMENT' | translate }}</ion-label>
-      <ion-input (click)="showTraitementModal()" [class.invalid]="!maladieForm.controls.nom_traitement.valid && (maladieForm.controls.nom_traitement.dirty || submitAttempt)" formControlName="nom_traitement" type="text"></ion-input>
+      <ion-input (click)="showTraitementModal()" [class.invalid]="!maladieForm.controls.traitementForm.valid && (maladieForm.controls.traitementForm.dirty || submitAttempt)" formControlName="traitementForm" type="text"></ion-input>
     </ion-item>
-    <p *ngIf="!maladieForm.controls.nom_traitement.valid  && (maladieForm.controls.nom_traitement.dirty || submitAttempt)">{{ 'FORM_NOM_TRAITEMENT_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.traitementForm.valid  && (maladieForm.controls.traitementForm.dirty || submitAttempt)">{{ 'FORM_NOM_TRAITEMENT_ALERTE' | translate }}</p>
 
-    <ion-list radio-group formControlName="radio_check">
+    <ion-list radio-group formControlName="radioForm">
       <p>{{ 'FORM_RADIO_CHECK' | translate }}</p>
       <ion-item no-lines>
-        <ion-label [class.invalid-bis]="!maladieForm.controls.radio_check.valid && (maladieForm.controls.radio_check.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_1' | translate }}</ion-label>
-        <ion-radio value="{{ 'FORM_RADIO_OPTION_1' | translate }}" [class.invalid-bis]="!maladieForm.controls.maladie_check.valid && (maladieForm.controls.maladie_check.dirty || submitAttempt)"></ion-radio>
+        <ion-label [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_1' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_RADIO_OPTION_1' | translate }}" [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)"></ion-radio>
       </ion-item>
       <ion-item no-lines>
-        <ion-label [class.invalid-bis]="!maladieForm.controls.radio_check.valid && (maladieForm.controls.radio_check.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_2' | translate }}</ion-label>
-        <ion-radio value="{{ 'FORM_RADIO_OPTION_2' | translate }}" [class.invalid-bis]="!maladieForm.controls.radio_check.valid && (maladieForm.controls.radio_check.dirty || submitAttempt)"></ion-radio>
+        <ion-label [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_2' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_RADIO_OPTION_2' | translate }}" [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)"></ion-radio>
       </ion-item>
       <ion-item no-lines>
-        <ion-label [class.invalid-bis]="!maladieForm.controls.radio_check.valid && (maladieForm.controls.radio_check.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_3' | translate }}</ion-label>
-        <ion-radio value="{{ 'FORM_RADIO_OPTION_3' | translate }}" [class.invalid-bis]="!maladieForm.controls.radio_check.valid && (maladieForm.controls.radio_check.dirty || submitAttempt)"></ion-radio>
+        <ion-label [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)">{{ 'FORM_RADIO_OPTION_3' | translate }}</ion-label>
+        <ion-radio value="{{ 'FORM_RADIO_OPTION_3' | translate }}" [class.invalid-bis]="!maladieForm.controls.radioForm.valid && (maladieForm.controls.radioForm.dirty || submitAttempt)"></ion-radio>
       </ion-item>
     </ion-list>
-    <p *ngIf="!maladieForm.controls.radio_check.valid  && (maladieForm.controls.radio_check.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.radioForm.valid  && (maladieForm.controls.radioForm.dirty || submitAttempt)">{{ 'FORM_OPTION_ALERTE' | translate }}</p>
     
     <ion-item no-lines>
       <ion-label floating>{{ 'FORM_ONCO_REF' | translate }}</ion-label>
-      <ion-input [class.invalid]="!maladieForm.controls.onco_ref.valid && (maladieForm.controls.onco_ref.dirty || submitAttempt)" formControlName="onco_ref" type="text"></ion-input>
+      <ion-input [class.invalid]="!maladieForm.controls.oncoForm.valid && (maladieForm.controls.oncoForm.dirty || submitAttempt)" formControlName="oncoForm" type="text"></ion-input>
     </ion-item>
-    <p *ngIf="!maladieForm.controls.onco_ref.valid  && (maladieForm.controls.onco_ref.dirty || submitAttempt)">{{ 'FORM_ONCO_REF_ALERTE' | translate }}</p>
+    <p *ngIf="!maladieForm.controls.oncoForm.valid  && (maladieForm.controls.oncoForm.dirty || submitAttempt)">{{ 'FORM_ONCO_REF_ALERTE' | translate }}</p>
 
   </form>
   <button class="ButtonValide" ion-button icon-end large clear (click)="nextPage()">

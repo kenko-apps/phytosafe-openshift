@@ -1,0 +1,43 @@
+<ion-header no-shadow>
+  <ion-navbar>
+    <ion-title>
+      <h2 class="slide-title">{{ 'FORM_PHYTO' | translate }}</h2>
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content no-bounce>
+  <p *ngIf="!traitementNomForm.valid && (submitAttempt || checkTraitement)" class="FormAlerte">{{ 'FORM_ALERTE' | translate }}</p>
+  
+  <form [formGroup]="traitementNomForm" novalidate>  
+    <div>
+      <ion-list class="row" no-lines *ngFor="let phytotmt of traitementTable; let i=index">
+        <ion-item no-lines>
+          <ion-label floating>{{ 'FORM_PHYTO_NOM' | translate }}</ion-label>
+          <ion-input (click)="showTraitementModal(i)" [formControlName]=phytotmt.phytonom type="text" [class.invalid]="!phytotmt.phytonomControl.valid && (phytotmt.phytonomControl.dirty || submitAttempt || checkTraitement)"></ion-input>
+        </ion-item>
+        <ion-item no-lines>
+          <ion-label floating>{{ 'FORM_PHYTO_DATE' | translate }}</ion-label>
+          <ion-datetime cancelText="annuler" doneText="valider" [formControlName]=phytotmt.phytodate displayFormat="DD MMM YYYY" 
+            monthShortNames="jan, f\u00e9v, mars, avr, mai, juin, juil, ao\u00fbt, sept, oct, nov, d\u00e9c">
+          </ion-datetime>
+        </ion-item>
+        <ion-item class="ItemButtonClose" no-lines>
+          <button class="ButtonClose" *ngIf="traitementTable.length > 1" ion-button round clear (click)="removePhyto(i)">
+            <ion-icon class="IconClose" name="close"></ion-icon>
+          </button>
+        </ion-item>
+      </ion-list>
+      <p class="col" *ngIf="!traitementNomForm.valid && (submitAttempt || checkTraitement)">{{ 'FORM_PHYTO_NOM_ALERTE' | translate }}</p>
+    </div>
+    <button ion-button icon-start medium clear (click)="addPhyto()">
+      <ion-icon name="add"></ion-icon>
+      {{ 'FORM_PHYTO_PLUS' | translate }}
+    </button>
+  </form>
+
+  <button class="ButtonValide" ion-button icon-end large clear (click)="nextPage()">
+    {{ 'CONTINUE_BOUTON' | translate }}
+    <ion-icon name="arrow-forward"></ion-icon>
+  </button>
+</ion-content>
