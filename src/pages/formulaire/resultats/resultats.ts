@@ -118,15 +118,13 @@ export class Resultats implements OnInit {
    * @returns {} - aucune valeur n'est retournée par la fonction.
    */
   nextPage() {
+    this.localstockage.getAllData().then((dataForm)=>{
+      if (dataForm!=null){
+        //stocker les variables sous une autre forme puis aller à la page d'accueil
+      }      
 
-      //Vérifier si certaines données du formulaire n'ont pas été envoyées
-        //Si c'est le cas, stocker les variables sous une autre forme puis aller à la page d'accueil
-        //Sinon, aller directement à la page d'accueil
-      
-      
-
-    //Navigation à la page d'accueil du formulaire - Accueil
-    this.navCtrl.popToRoot();
-
+      //Navigation à la page d'accueil du formulaire - Accueil
+      this.navCtrl.popToRoot();
+    });
   }
 }
