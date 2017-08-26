@@ -1,5 +1,5 @@
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Component} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { Traitement } from '../../../providers/traitement';
   selector: 'maladie',
   templateUrl: 'maladie.html'
 })
-export class Maladie {
+export class Maladie implements OnInit {
 
   maladieForm: FormGroup;
   submitAttempt: boolean = false;
@@ -48,7 +48,10 @@ export class Maladie {
         radioForm:  ['', Validators.required],
         oncoForm: ['', Validators.compose([Validators.maxLength(30), Validators.pattern('([a-zA-Zéèêëàäâùüûïîöôçÿ. ]*)([\-]?)([a-zA-Zéèêëàäâùüûïîöôçÿ ]*)')])]
     });
-    traitement.getTrait().toPromise().then((res) => {
+  }
+
+  ngOnInit(){
+    this.traitement.getTrait().toPromise().then((res) => {
       this.traitementNom = [res.blob];//A VERIFIER - BLOB PERMET DE RETROUVER LE BODY DE LA REPONSE!!
     }).catch((err)=>{
       console.error('ERROR', err);

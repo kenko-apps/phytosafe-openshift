@@ -1,5 +1,5 @@
-import { FormGroup, FormBuilder, FormControl, Validators, FormArray } from '@angular/forms';
-import { Component} from '@angular/core';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { Component, OnInit} from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { TranslateService } from '@ngx-translate/core';
@@ -15,7 +15,7 @@ import { Traitement } from '../../../providers/traitement';
   selector: 'traitement-nom',
   templateUrl: 'traitement-nom.html'
 })
-export class TraitementNom {
+export class TraitementNom implements OnInit{
 
   traitementNomForm: FormGroup;
   submitAttempt: boolean = false;
@@ -28,11 +28,14 @@ export class TraitementNom {
   traitementPlaceholder: string;
   
   constructor(public navCtrl: NavController, public modalCtrl: ModalController, public translate: TranslateService, public formBuilder: FormBuilder, public formulaire: Formulaire, public localstockage: LocalStockage, public traitement: Traitement) {
-    this.createTraitObjet();
     this.traitementNomForm = formBuilder.group({});
+  }
+
+  ngOnInit(){
+    this.createTraitObjet();
     this.traitementNomForm.addControl(this.traitementTable[0].phytonom, this.traitementTable[0].phytonomControl);
     this.traitementNomForm.addControl(this.traitementTable[0].phytodate, this.traitementTable[0].phytodateControl);
-    /* traitement.getTrait().toPromise().then((res) => {
+    /* this.traitement.getTrait().toPromise().then((res) => {
       this.traitementNom = [res.blob];//A VERIFIER - BLOB PERMET DE RETROUVER LE BODY DE LA REPONSE!!
     }).catch((err)=>{
       console.error('ERROR', err);

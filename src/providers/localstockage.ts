@@ -59,7 +59,7 @@ export class LocalStockage {
   }
 
   /**
-   * Méthode qui récupère l'ensemble des données stockées localement.
+   * Méthode qui récupère l'ensemble des données stockées localement, sauf l'identifiant du formulaire.
    * @method getAllData
    * @param {} - aucun paramètre n'est passé à la méthode.
    * @returns {Promise} - une promesse est renvoyée avec les valeurs des donnés stockées sous la forme d'un objet. 
@@ -68,7 +68,7 @@ export class LocalStockage {
     let data = {};
     return new Promise((resolve, reject) => {
       this.storage.forEach( (value, key, index) => {
-        if (typeof key === 'string' && key.endsWith('Form')){
+        if (typeof key === 'string' && key.endsWith('Form') && key!="idForm"){
           data[key]=value;
           console.log('la valeur est ' + value + ' et la key est ' + key);
         }
